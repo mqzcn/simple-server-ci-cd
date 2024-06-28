@@ -22,6 +22,7 @@ WORKDIR /app
 # We run `pipenv install` to install our project's dependencies. Since we've
 # copied in our `Pipfile`, `pipenv` will use that to get a list of dependencies.
 # We include a couple of extra options suitable for deployment.
+RUN pipenv lock
 RUN pipenv install --system --deploy
 
 # At this point we've set up our virtual computer, but we've not _yet_ run our
@@ -30,4 +31,6 @@ RUN pipenv install --system --deploy
 
 # So we're going to tell Docker here that when we _do_ want to run it, this is
 # what it should run:
+# RUN echo "python --version"
+# CMD ["python", "--version"]
 CMD ["python", "app.py"]
